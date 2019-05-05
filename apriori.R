@@ -1,0 +1,11 @@
+install.packages("arules")
+install.packages("base")
+install.packages("abbreviate")
+install.packages("write")
+library("arules")
+
+input_file = file.choose()
+files_change<-read.transactions(input_file, format="basket", sep=",")
+summary(files_change)
+rules<-apriori(files_change,parameter=list(support=0.01,confidence=0.5))
+inspect(sort(rules, by="lift"))
